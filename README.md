@@ -18,7 +18,7 @@ The dataset has two variations:
 After the features of all the videos were extracted, we split a test portion (not public) and batched all the videos.
 
 Each npz file represents a batch of variable size, but all split to have at max 4 Gbs when loaded to memory.
-Each npz file has keys and values, the keys are string in the format <label>\_<video id>. Some examples of keys in the npz file: "improper_29024487", "proper_MqnZqzAxQTk", "improper_gore122". Videos labeled as "improper" are Sensitive, and "proper" are safe.
+Each npz file has keys and values, the keys are string in the format (label)\_(video id). Some examples of keys in the npz file: "improper_29024487", "proper_MqnZqzAxQTk", "improper_gore122". Videos labeled as "improper" are Sensitive, and "proper" are safe.
 
 The values are the videos features stored in numpy arrays, of varying shape, depending on the dataset variation (sequential or non-sequential).
 
@@ -33,7 +33,7 @@ Violence and blood in general collected in multiple violent content websites.
 
 ## Safe content
 #### Youtube videos
-Taken from the dataset [youtube8m](https://research.google.com/youtube8m/)
+Videos collected from the [youtube8m](https://research.google.com/youtube8m/) dataset.
 
 ## Dataset tree
 <pre>
