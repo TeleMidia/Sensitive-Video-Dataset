@@ -12,7 +12,7 @@ The image features were extracted by [Inception V3](https://github.com/google/yo
 The audio embeddings were extracted by the network [Vggish](https://github.com/tensorflow/models/tree/master/research/audioset/vggish), the output of this network is 128 floats.
 
 The dataset has two variations: 
-- Sequential: Each sample remains as it was extracted, a single video generates a sequence of N samples. In this variation, inside each npz file each instance is represented by a N by 1152.
+- Sequential: Each sample remains as it was extracted, a single video generates a sequence of N samples. In this variation, inside each npz file each instance is represented by a N by 1152 numpy array.
 - Non-Sequential: All samples of a video are aggregated into a single sample, resulting in each instance having a shape of 1 by 5760, this single sample summarizes the entire video.
 
 After the features of all the videos were extracted, we split a test portion (not public) and batched all the videos.
