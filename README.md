@@ -1,4 +1,4 @@
-# Sensitive-Content-Dataset
+# Sensitive Video Dataset
 
 Massive amounts of video are uploaded on video-hosting platforms every minute. This volume of data presents a challenge in controlling the type of content uploaded to these video hosting services, for those platforms are responsible for any sensitive media uploaded by their users.
 There has been an abundance of research on methods for developing automatic detection of sensitive content. In this paper, we present a sensitive video dataset for binary video classification (whether there is sensitive content in the video or not), containing 127 thousand tagged videos, Each with their extracted audio and visual embeddings.  
