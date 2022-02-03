@@ -1,30 +1,30 @@
 # Sensitive Video Dataset
 
-Massive amounts of video are uploaded on video-hosting platforms every minute. This volume of data presents a challenge in controlling the type of content uploaded to these video hosting services, for those platforms are responsible for any sensitive media uploaded by their users.
-There has been an abundance of research on methods for developing automatic detection of sensitive content. In this paper, we present a sensitive video dataset for binary video classification (whether there is sensitive content in the video or not), containing 127 thousand tagged videos, Each with their extracted audio and visual embeddings.  
-We define sensitive content as sex, violence, gore or any media that may cause distress on the viewer.
+Massive amounts of video are uploaded on video-hosting platforms every minute. This volume of data presents a challenge in controlling the type of content uploaded to these video hosting services. Those platforms are responsible for any sensitive media uploaded by their users. In this context, we propose the 110K Sensitive Video Dataset for binary video classification (whether there is sensitive content in the video or not), containing more than 110 thousand tagged videos. Additionally, we separated an exclusive subset with 11 thousand videos for testing in Kaggle.
+
+To compose the sensitive video subset, we collected videos with content of sex, violence, and gore from various internet sources. While composing the subset of safe videos, we collect videos from everyday life, online courses, tutorials, sports, etc. It is worth mentioning that we were concerned about creating more challenging examples for each class. We collected sex videos with people wearing full-body clothes (e.g., latex and cosplay) for the sensitive video class. Moreover, we have collected videos that could be misclassified as sensitive for the safe videos class, such as MMA, breastfeeding, pool party, beach, and other videos with a higher amount of skin exposure.
+
 
 ## Objective
+
 To foster new methods for sensitive content detection in video.
+
+
 ## Feature/embeddings extractor
-We extracted visual and audio embeddings, concatenated them and save the labels and features of each video.
-The image features were extracted by [Inception V3](https://github.com/google/youtube-8m/tree/master/feature_extractor), the output of this network is 1024 floats.
-The audio embeddings were extracted by the network [Vggish](https://github.com/tensorflow/models/tree/master/research/audioset/vggish), the output of this network is 128 floats.
+
+We extracted visual and audio embeddings, concatenated them, and saved each video's labels and features. [Inception V3](https://github.com/google/youtube-8m/tree/master/feature_extractor) extracted the visual features, generating embeddings of 1024-d. The audio embeddings were extracted by the [Vggish](https://github.com/tensorflow/models/tree/master/research/audioset/vggish) network, generating embeddings of 128-d.
 
 The dataset has two variations: 
-- Sequential: Each sample remains as it was extracted, a single video generates a sequence of N samples. In this variation, inside each npz file each instance is represented by a N by 1152 numpy array.
-- Non-Sequential: All samples of a video are aggregated into a single sample, resulting in each instance having a shape of 1 by 5760, this single sample summarizes the entire video.
+- Sequential: Each video is sampled into windows of 0.96s, resulting in an array of shapes (N, 1152), where the video duration limits N.
+- Non-Sequential: The entire video is globally aggregated as a single sample, generating an array of shapes (1, 1152). Additionally, we compute the mean, median, max, min, and std for each feature, resulting in a final array of shapes (1, 5760) for each video.
 
-After the features of all the videos were extracted, we split a test portion (not public) and batched all the videos.
+We structured this dataset into chunks with a max size of 4GB. Each chunk was stored as an NPZ file. Chunks are composed of keys and values; the keys are strings in the format (label)_(video id) (for instance, "improper_29024487", "proper_MqnZqzAxQTk", "improper_gore122"). Videos labeled as "improper" are Sensitive, and "proper" are safe. The values are the audio-visual embeddings stored as NumPy arrays. 
 
-Each npz file represents a batch of variable size, but all split to have at max 4 Gbs when loaded to memory.
-Each npz file has keys and values, the keys are string in the format (label)\_(video id). Some examples of keys in the npz file: "improper_29024487", "proper_MqnZqzAxQTk", "improper_gore122". Videos labeled as "improper" are Sensitive, and "proper" are safe.
+A CSV file in the root directory contains all video indexes, metadata, and tags.
 
-The values are the videos features stored in numpy arrays, of varying shape, depending on the dataset variation (sequential or non-sequential).
-
-There is also a main dataframe (we called it index), this dataframe is indexed by video id and contains all the other gathered data, such as tags, file size, duration, and title.
 
 ## Data Collection
+
 ### Sensitive content
 #### Pornography
 Videos collected from public Xvideos database.
@@ -84,6 +84,18 @@ A. C. Serra, P. R. C. Mendes, P. V. A. de Freitas, A. J. G. Busson, A. L. V.Gued
 
 ## Cite this dataset
 
+Pedro Vinicius Almeida de Freitas, Gabriel Noronha Pereira dos Santos, Antonio José Grandson Busson, Alan Livio Vasconcelos Guedes, Sérgio Colcher, February 2, 2022, "110K Sensitive Video Dataset", IEEE Dataport, doi: https://dx.doi.org/10.21227/sx01-1p81. 
+
+Bibtex
+<pre>
+@data{sx01-1p81-22,
+doi = {10.21227/sx01-1p81},
+url = {https://dx.doi.org/10.21227/sx01-1p81},
+author = {Almeida de Freitas, Pedro Vinicius and Noronha Pereira dos Santos, Gabriel and José Grandson Busson, Antonio and Livio Vasconcelos Guedes, Alan and Colcher, Sérgio},
+publisher = {IEEE Dataport},
+title = {110K Sensitive Video Dataset},
+year = {2022} } 
+</pre>
 
 ## License
 [GPL](https://choosealicense.com/licenses/gpl-3.0/)
