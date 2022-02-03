@@ -1,0 +1,32 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+sets = "*"
+jupyterthemes = "*"
+jupyter = "*"
+requests = "*"
+beautifulsoup4 = "*"
+youtube-dl = "*"
+pillow = "*"
+jupyter-contrib-nbextensions = "*"
+seaborn = "*"
+
+[packages]
+ipykernel = "*"
+matplotlib = "==3.0.3"
+tqdm = "*"
+opencv-python = "*"
+resampy = "*"
+sklearn = "*"
+keras = "==2.0.8"
+pandas = "*"
+scipy = "*"
+soundfile = "*"
+tensorflow = "==1.14"
+jupyter = "*"
+
+[requires]
+python = "==3.6.8"
